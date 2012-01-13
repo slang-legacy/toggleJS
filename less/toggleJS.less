@@ -28,7 +28,7 @@
 }
 
 // Style
-.ibutton-container {
+.toggle-container {
   height: 23px;
   position: relative;
   cursor: pointer;
@@ -56,24 +56,24 @@
   }
 }
 
-.ibutton-container, .ibutton-handle {
+.toggle-container, .toggle-handle {
   .border-radius(3px);
 }
 
 // create an outline when button gets focus via keyboard
-.ibutton-focus {
+.toggle-focus {
   label {
     // we must use border, since outline doesn't work in IE
     border: 1px dotted #666 !important;
   }
 
-  div.ibutton-label-on span label {
+  div.toggle-label-on span label {
     // use white for more contrast
     border-color: #fff !important;
   }
 }
 
-.ibutton-handle {
+.toggle-handle {
   display: block;
   cursor: inherit;
   position: absolute;
@@ -88,7 +88,7 @@
   height: 100%;
 }
 
-div.ibutton-label-on, div.ibutton-label-off {
+div.toggle-label-on, div.toggle-label-off {
   white-space: nowrap;
   font-size: 17px;
   line-height: 17px;
@@ -103,7 +103,7 @@ div.ibutton-label-on, div.ibutton-label-off {
   overflow: hidden;
 }
 
-div.ibutton-label-on {
+div.toggle-label-on {
   .advanced-gradent(#3061a8, #83b3f2);
   color: #fff;
   text-shadow: 0 -1px 2px rgba(0, 0, 0, 0.4);
@@ -115,7 +115,7 @@ div.ibutton-label-on {
   }
 }
 
-div.ibutton-label-off {
+div.toggle-label-off {
   color: #7c7c7c;
   .advanced-gradent(#adadad, #fff);
   text-shadow: 0 -1px 2px rgba(153, 153, 153, 0.4);
