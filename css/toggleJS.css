@@ -1,4 +1,4 @@
-.toggle-container{height:23px;position:relative;cursor:pointer;overflow:hidden;max-width:400px;width:89px;}.toggle-container input{position:absolute;top:0;right:0;-moz-opacity:0;filter:alpha(opacity=0);opacity:0;-moz-user-input:enabled !important;}
+.toggle-container{display:inline-block;vertical-align:middle;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none;height:23px;position:relative;cursor:pointer;overflow:hidden;max-width:400px;width:89px;}.toggle-container input{position:absolute;top:0;right:0;-moz-opacity:0;filter:alpha(opacity=0);opacity:0;-moz-user-input:enabled !important;}
 .toggle-container label{margin-left:auto;cursor:inherit;font-size:1em !important;line-height:23px;}
 .toggle-container,.toggle-handle{-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 .toggle-focus label{border:1px dotted #666 !important;}
