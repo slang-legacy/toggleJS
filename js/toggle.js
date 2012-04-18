@@ -1,21 +1,4 @@
-/*
- * toggleJS jQuery Plug-in
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- * 	http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Date: 2011-07-26
- * Rev:  1.0.03
- */
+//TODO: make toggle change with l/r arrow keys when on keyboard focus
 (function($) {
 	// set default options
 	$.toggleSwitch = {
@@ -29,7 +12,7 @@
 		var method = typeof arguments[0] == "string" && arguments[0];
 		var args = method && Array.prototype.slice.call(arguments, 1) || arguments;
 		// get a reference to the first toggle found
-		var self = (this.length == 0) ? null : $.data(this[0], "toggle");
+		var self = (this.length === 0) ? null : $.data(this[0], "toggle");
 
 		// if a method is supplied, execute it for non-empty results
 		if (self && method && this.length) {
@@ -44,7 +27,7 @@
 					// apply the method to the current element
 					var r = $.data(this, "toggle")[method].apply(self, args);
 					// if first iteration we need to check if we're done processing or need to add it to the jquery chain
-					if (i == 0 && r) {
+					if (i === 0 && r) {
 						// if this is a jQuery item, we need to store them in a collection
 						if ( !! r.jquery) {
 							result = $([]).add(r);
@@ -71,7 +54,7 @@
 			return this.each(function() {
 				new toggle(this, options);
 			});
-		};
+		}
 	};
 
 	// count instances
@@ -93,15 +76,12 @@
 				position: null,
 				offset: null,
 				time: null
-			}
+			},
 			// make a copy of the options and use the metadata if provided
-			,
-			options = $.extend({}, defaults, options, ( !! $.metadata ? $input.metadata() : {}))
+			options = $.extend({}, defaults, options, ( !! $.metadata ? $input.metadata() : {})),
 			// check to see if we're using the default labels
-			,
-			bDefaultLabelsUsed = (options.labelOn == ON && options.labelOff == OFF)
+			bDefaultLabelsUsed = (options.labelOn == ON && options.labelOff == OFF),
 			// set valid field types
-			,
 			allow = ":checkbox, :radio";
 
 		// only do for checkboxes buttons, if matches inside that node
@@ -153,7 +133,19 @@
 			if ($.isFunction(options.destroy)) options.destroy.apply(self, [$input, options]);
 		};
 
-		$input.wrap('<div title="' + $input[0].title + '" class="' + $.trim(options.classContainer + ' ' + options.className) + '" />').after('<div class="' + options.classHandle + '"></div>' + '<div class="' + options.classLabelOff + '"><span><label>' + options.labelOff + '</label></span></div>' + '<div class="' + options.classLabelOn + '"><span><label>' + options.labelOn + '</label></span></div>');
+		if(! $input[0].dataset.labeloff){
+			var labelOff = options.labelOff;
+		} else {
+			var labelOff = $input[0].dataset.labeloff;
+		}
+
+		if(! $input[0].dataset.labelon){
+			var labelOn = options.labelOn;
+		} else {
+			var labelOn = $input[0].dataset.labelon;
+		}
+
+		$input.wrap('<div title="' + $input[0].title + '" class="' + $.trim(options.classContainer + ' ' + options.className) + '" />').after('<div class="' + options.classHandle + '"></div>' + '<div class="' + options.classLabelOff + '"><span><label>' + labelOff + '</label></span></div>' + '<div class="' + options.classLabelOn + '"><span><label>' + labelOn + '</label></span></div>');
 
 		var $container = $input.parent(),
 			$handle = $input.siblings("." + options.classHandle),
@@ -265,7 +257,7 @@
 		// monitor when the mouse button is released
 		$(document).bind("mouseup.toggle_" + id + " touchend.toggle_" + id, function(e) {
 			if (mouse.clicked != $handle) {
-				return false
+				return false;
 			}
 			e.preventDefault();
 
@@ -355,27 +347,18 @@
 	};
 
 	var defaults = {
-		duration: 200 // the speed of the animation
-		,
-		easing: "swing" // the easing animation to use
-		,
-		labelOn: "YES" // the text to show when toggled on
-		,
-		labelOff: "NO" // the text to show when toggled off
-		,
-		resizeHandle: "auto" // determines if handle should be resized
-		,
-		resizeContainer: "auto" // determines if container should be resized
-		,
-		enableDrag: true // determines if we allow dragging
-		,
-		enableFx: true // determines if we show animation
-		,
-		allowRadioUncheck: false // determine if a radio button should be able to be unchecked
-		,
-		clickOffset: 120 // if millseconds between a mousedown & mouseup event this value, then considered a mouse click
+		duration: 200, // the speed of the animation
+		easing: "swing", // the easing animation to use
+		labelOn: "On", // the text to show when toggled on
+		labelOff: "Off", // the text to show when toggled off
+		resizeHandle: "auto", // determines if handle should be resized
+		resizeContainer: "auto", // determines if container should be resized
+		enableDrag: true, // determines if we allow dragging
+		enableFx: true, // determines if we show animation
+		allowRadioUncheck: false, // determine if a radio button should be able to be unchecked
+		clickOffset: 120, // if millseconds between a mousedown & mouseup event this value, then considered a mouse click
+		
 		// define the class statements
-		,
 		className: "",
 		classContainer: "toggle-container",
 		classDisabled: "toggle-disabled",
@@ -383,18 +366,13 @@
 		classLabelOn: "toggle-label-on",
 		classLabelOff: "toggle-label-off",
 		classHandle: "toggle-handle",
-		classHandleActive: "toggle-active-handle"
+		classHandleActive: "toggle-active-handle",
 
 		// event handlers
-		,
-		init: null // callback that occurs when a toggle is initialized
-		,
-		change: null // callback that occurs when the button state is changed
-		,
-		click: null // callback that occurs when the button is clicked
-		,
-		disable: null // callback that occurs when the button is disabled/enabled
-		,
+		init: null, // callback that occurs when a toggle is initialized
+		change: null, // callback that occurs when the button state is changed
+		click: null, // callback that occurs when the button is clicked
+		disable: null, // callback that occurs when the button is disabled/enabled
 		destroy: null // callback that occurs when the button is destroyed
 	},
 		ON = defaults.labelOn,
