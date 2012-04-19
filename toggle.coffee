@@ -16,6 +16,38 @@
 
 #TODO: make toggle change with l/r arrow keys when on keyboard focus
 ($) ->
+	defaults =
+		duration: 200 #the speed of the animation
+		easing: "swing" #the easing animation to use
+		labelOn: "On" #the text to show when toggled on
+		labelOff: "Off" #the text to show when toggled off
+		resizeHandle: "auto" #determines if handle should be resized
+		resizeContainer: "auto" #determines if container should be resized
+		enableDrag: true #determines if we allow dragging
+		enableFx: true #determines if we show animation
+		allowRadioUncheck: false #determine if a radio button should be able to be unchecked
+		clickOffset: 120 #if millseconds between a mousedown & mouseup event this value, then considered a mouse click
+
+		#define the class statements
+		className: ""
+		classContainer: "toggle-container"
+		classDisabled: "toggle-disabled"
+		classFocus: "toggle-focus"
+		classLabelOn: "toggle-label-on"
+		classLabelOff: "toggle-label-off"
+		classHandle: "toggle-handle"
+		classHandleActive: "toggle-active-handle"
+
+		#event handlers
+		init: null #callback that occurs when a toggle is initialized
+		change: null #callback that occurs when the button state is changed
+		click: null #callback that occurs when the button is clicked
+		disable: null #callback that occurs when the button is disabled/enabled
+		destroy: null #callback that occurs when the button is destroyed
+
+	ON = defaults.labelOn
+	OFF = defaults.labelOff
+
 	#set default options
 	$.toggleSwitch =
 		version: "1.0.03"
@@ -279,44 +311,12 @@
 				options.click.apply self, [ $input[0].checked, $input, options ]
 		@disable true if $input.is(":disabled") #if the field is disabled, mark it as such
 
-		#special shit for IE
+		#shit for IE
 		if $.browser.msie
 			#disable text selection in IE, other browsers are controlled via CSS (because other browsers were designed correctly)
 			#IE needs to register to the "click" event (because it is gay) to make changes immediately (the change event only occurs on blur)
 			$container.find("*").andSelf().attr "unselectable", "on"
 			$input.bind "click.toggle", ->
 				$input.triggerHandler "change.toggle"
-
-		options.init.apply self, [ $input, options ]  if $.isFunction(options.init) #run the init callback
-
-	defaults =
-		duration: 200 #the speed of the animation
-		easing: "swing" #the easing animation to use
-		labelOn: "On" #the text to show when toggled on
-		labelOff: "Off" #the text to show when toggled off
-		resizeHandle: "auto" #determines if handle should be resized
-		resizeContainer: "auto" #determines if container should be resized
-		enableDrag: true #determines if we allow dragging
-		enableFx: true #determines if we show animation
-		allowRadioUncheck: false #determine if a radio button should be able to be unchecked
-		clickOffset: 120 #if millseconds between a mousedown & mouseup event this value, then considered a mouse click
-
-		#define the class statements
-		className: ""
-		classContainer: "toggle-container"
-		classDisabled: "toggle-disabled"
-		classFocus: "toggle-focus"
-		classLabelOn: "toggle-label-on"
-		classLabelOff: "toggle-label-off"
-		classHandle: "toggle-handle"
-		classHandleActive: "toggle-active-handle"
-
-		#event handlers
-		init: null #callback that occurs when a toggle is initialized
-		change: null #callback that occurs when the button state is changed
-		click: null #callback that occurs when the button is clicked
-		disable: null #callback that occurs when the button is disabled/enabled
-		destroy: null #callback that occurs when the button is destroyed
-
-	ON = defaults.labelOn
-	OFF = defaults.labelOff
+		
+	options.init.apply(self, [$input, options]) if $.isFunction(options.init) #run the init callback
