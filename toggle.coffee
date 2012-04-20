@@ -14,8 +14,6 @@
 	limitations under the License.
 ###
 
-console.log 'thehthe'
-
 #TODO: make toggle change with l/r arrow keys when on keyboard focus
 (($) ->
 	#set default options
