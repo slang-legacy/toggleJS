@@ -14,8 +14,10 @@
 	limitations under the License.
 ###
 
+console.log 'thehthe'
+
 #TODO: make toggle change with l/r arrow keys when on keyboard focus
-($) ->
+(($) ->
 	#set default options
 	$.toggleSwitch =
 		version: "1.0.03"
@@ -321,3 +323,4 @@
 
 	ON = defaults.labelOn
 	OFF = defaults.labelOff
+) jQuery
