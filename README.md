@@ -4,4 +4,4 @@ ToggleJS is a jQuery plug-in that emulates the checkbox functionality used by th
 
 It is based on iButton by Giva Labs, however has rewritten CSS to LESS, and no longer requires any images.
 
-view example page at http://togglejs.github.com/toggleJS
+view example page at http://slang800.github.com/toggleJS/
