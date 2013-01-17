@@ -1,6 +1,6 @@
 #ToggleJS
 
-ToggleJS is a jQuery plug-in that emulates the checkbox functionality used by the iPhone.
+ToggleJS is a jQuery plug-in that replaces checkboxes or radio switches with toggle switches similar to those used by the iPhone.
 
 It is based on iButton by Giva Labs, however has rewritten CSS to LESS, and no longer requires any images.
 
