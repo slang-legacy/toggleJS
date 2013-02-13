@@ -1,8 +1,8 @@
 #ToggleJS
 
-Note: this project is deprecated and won't be developed anymore. Thanks to the creation of CSS3 transitions, there are much better alternatives like [css-toggle-switch](https://github.com/ghinda/css-toggle-switch).
+Note: Thanks to the creation of CSS3 transitions, there are alternatives like [css-toggle-switch](https://github.com/ghinda/css-toggle-switch) which may be better for simple toggles.
 
-CSS based toggle switches don't have the ability to be dragged (right now). However, they are the same as ToggleJS in all other aspects, so it doesn't seem worthwhile to maintain this project for that single benefit.
+CSS based toggle switches don't have the ability to be dragged (right now) and sometimes require extra markup. However, they work very well for most projects and don't rely on JS/jQuery.
 
 ----------------
 
